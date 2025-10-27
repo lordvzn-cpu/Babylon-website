@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>𓆩𒌐𓆪BABYLON𓆩𒌐𓆪 — Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { --glass: rgba(0,0,0,0.45); --glass-light: rgba(255,255,255,0.9); }
+  body { transition: background .25s,color .25s; }
+  body.dark { background: linear-gradient(180deg,#030417,#071028); color: #e6eef8; }
+  body.light { background: linear-gradient(180deg,#f7fbff,#eef2ff); color:#071028; }
+  .glass { background: var(--glass); backdrop-filter: blur(6px); }
+  .glass-light { background: var(--glass-light); backdrop-filter: blur(6px); }
+  .rounded-card { border-radius: 14px; }
+  .msg-user { background: linear-gradient(90deg,#4f46e5,#ec4899); color: white; }
+  .msg-bot { background: rgba(255,255,255,0.03); color: inherit; }
+  .signup-scroll { max-height: 78vh; overflow:auto; -webkit-overflow-scrolling: touch; padding-right:8px; }
+  #sidebar { transition: transform .28s ease; transform: translateX(-110%); }
+  #sidebar.open { transform: translateX(0); }
+  button:focus, input:focus, textarea:focus { outline: 3px solid rgba(99,102,241,0.12); outline-offset: 2px; }
+  .mini-txt { font-size: .85rem; opacity:.8; }
+</style>
+</head>
+<body class="dark antialiased min-h-screen" id="root">
+
+  <!-- TOP BAR -->
+  <header class="fixed top-4 left-4 right-4 z-50 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img id="group-dp" src="https://i.ibb.co/PZQcgxkZ/subzero-bot.jpg" alt="Babylon dp" class="w-12 h-12 rounded-full object-cover ring-2 ring-white/20 shadow">
+      <div>
+        <div class="mini-txt">Group</div>
+        <div class="font-extrabold leading-none">𓆩𒌐𓆪𝗕𝗔𝗕𝗬𝗟𝗢𝗡𓆩𒌐𓆪</div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button id="dashboard-open" class="p-2 rounded-full bg-white/6 hover:bg-white/10">☰</button>
+      <button id="theme-toggle" class="p-2 rounded-full bg-white/6 hover:bg-white/10"><span id="theme-icon">🌙</span></button>
+      <button id="open-ai-btn" class="px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow">Open AI</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="fixed inset-y-0 left-0 z-60 w-64 p-4 glass rounded-r-xl shadow-lg">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="font-bold">Dashboard</div>
+        <div class="mini-txt">Quick nav</div>
+      </div>
+      <button id="sidebar-close" class="p-1 rounded-full bg-white/6">✕</button>
+    </div>
+
+    <nav class="flex flex-col gap-2">
+      <button class="dash-item px-3 py-2 rounded-full text-left hover:bg-white/6" data-target="home">Home</button>
+      <button class="dash-item px-3 py-2 rounded-full text-left hover:bg-white/6" data-target="gallery">Gallery</button>
+      <button class="dash-item px-3 py-2 rounded-full text-left hover:bg-white/6" data-target="members">Members</button>
+      <button class="dash-item px-3 py-2 rounded-full text-left hover:bg-white/6" data-target="admins">Admins</button>
+      <button class="dash-item px-3 py-2 rounded-full text-left hover:bg-white/6" data-target="ai">Babylon AI</button>
+      <button id="open-signup" class="px-3 py-2 rounded-full text-left hover:bg-white/6">Sign Up</button>
+    </nav>
+
+    <div class="mt-6 mini-txt text-gray-300">Quick Links</div>
+    <a target="_blank" href="https://chat.whatsapp.com/KoFgZ8NNKsZ2gRERKdWMg2?mode=wwt" class="block mt-2 px-3 py-2 rounded-full bg-green-600 text-white text-center">Join GC</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto pt-28 pb-20 px-4">
+
+    <!-- HERO -->
+    <section id="home" class="glass rounded-card p-6 sm:p-10 shadow-lg grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+      <div class="md:col-span-2">
+        <h1 class="text-3xl sm:text-4xl font-extrabold">𓆩𒌐𓆪𝗕𝗔𝗕𝗬𝗟𝗢𝗡𓆩𒌐𓆪</h1>
+        <p class="mt-3 opacity-80">Where the lines between reality and chaos are blurred. This is a realm where wit is sharpened to a deadly edge — come if you dare.</p>
+
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a target="_blank" href="https://chat.whatsapp.com/KoFgZ8NNKsZ2gRERKdWMg2?mode=wwt" class="rounded-full px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold">Join Babylon GC</a>
+          <button id="gallery-btn" class="rounded-full px-5 py-2 bg-white/8 hover:bg-white/12">View Gallery</button>
+          <button id="ask-ai-btn" class="rounded-full px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white">Ask Babylon AI</button>
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end">
+        <div class="w-48 h-48 rounded-2xl overflow-hidden ring-4 ring-white/10 shadow-lg">
+          <img id="hero-img" src="https://i.ibb.co/PZQcgxkZ/subzero-bot.jpg" class="w-full h-full object-cover" alt="group dp">
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMINS + MEMBERS -->
+    <section class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div id="admins-card" class="glass rounded-card p-5">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold">Admins</h2>
+          <span class="mini-txt">👑</span>
+        </div>
+        <div id="admins-list" class="mt-4 space-y-3"></div>
+      </div>
+
+      <div class="lg:col-span-2 glass rounded-card p-5">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold">Members</h2>
+          <div class="mini-txt">Tap to view profile • Sign up to add yourself</div>
+        </div>
+        <div id="members-grid" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY / EVIDENCE / INFO -->
+    <section class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="glass rounded-card p-6">
+        <h3 class="font-semibold">WCW Gallery</h3>
+        <p class="mini-txt mt-1">Tap images to enlarge</p>
+        <div id="gallery-grid" class="mt-4 grid grid-cols-2 gap-3"></div>
+      </div>
+
+      <div class="glass rounded-card p-6">
+        <h3 class="font-semibold">Anonymous Evidence</h3>
+        <p class="mini-txt mt-1">Proof screenshot</p>
+        <img class="rounded-xl object-cover h-48 w-full mt-4 cursor-pointer" src="https://i.ibb.co/WWKqDJd0/subzero-bot.jpg" onclick="openLightbox(this.src)">
+      </div>
+
+      <div class="glass rounded-card p-6 prose prose-invert max-w-none">
+        <h3>Group Info & Doctrines</h3>
+        <p><strong>Welcome to 𓆩𒌐𓆪𝗕𝗔𝗕𝗬𝗟𝗢𝗡𓆩𒌐𓆪</strong></p>
+        <p>Where the lines between reality and chaos are blurred. This is a realm where wit is sharpened to a deadly edge, where culinary skills are forged in the fire of creative insults, and where the faint of heart are devoured by the shadows.</p>
+        <ul>
+          <li>𒄆 Don't be boring - we can't handle it.</li>
+          <li>𒄆 No external links allowed. Only admins can send links.</li>
+          <li>𒄆 No spamming stickers. There'll be consequences!</li>
+          <li>𒄆 Be brutal — no weaklings.</li>
+          <li>𒄆 Strictly no religion/political talks allowed.</li>
+        </ul>
+        <p>Link: <a class="text-blue-300" href="https://chat.whatsapp.com/G1L5u2a2Add6V6HDhm2XfD?mode=ems_copy_t" target="_blank">Babylon official link</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- AI FULLSCREEN -->
+  <div id="ai-screen" class="fixed inset-0 z-70 hidden items-center justify-center bg-black/70 p-4">
+    <div class="bg-[#071028] w-full max-w-4xl h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+      <div class="flex items-center justify-between p-4 border-b border-white/6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white font-bold">B</div>
+          <div>
+            <div class="font-semibold">Babylon AI</div>
+            <div class="mini-txt">Ask about the group or general questions</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="ai-close" class="px-3 py-1 rounded-full bg-white/6">Close</button>
+        </div>
+      </div>
+
+      <div id="ai-chat-body" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-black/10 to-transparent"></div>
+
+      <div class="p-4 border-t border-white/6 flex gap-3">
+        <input id="ai-input" class="flex-1 rounded-full px-4 py-3 bg-white/5 focus:outline-none" placeholder="Type a message and press Enter..." />
+        <button id="ai-send" class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="fixed inset-0 z-80 hidden items-center justify-center bg-black/80 p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl">×</button>
+    <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[95vh] rounded-lg object-contain shadow-2xl">
+  </div>
+
+  <!-- PROFILE MODAL -->
+  <div id="profile-modal" class="fixed inset-0 z-80 hidden items-center justify-center bg-black/70 p-4">
+    <div class="bg-[#071028] max-w-md w-full rounded-2xl p-6">
+      <button class="absolute top-6 right-6 text-white text-2xl" onclick="closeProfile()">×</button>
+      <div id="profile-content"></div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signup-modal" class="fixed inset-0 z-80 hidden items-center justify-center bg-black/70 p-4">
+    <div class="bg-white/5 w-full max-w-md rounded-2xl p-6 signup-scroll">
+      <button class="absolute top-6 right-6 text-white text-2xl" onclick="closeSignup()">×</button>
+      <h3 class="text-xl font-semibold mb-2">Create Account</h3>
+      <p class="mini-txt mb-3">Your profile will appear in Members. Stored in browser localStorage.</p>
+      <form id="signup-form" class="space-y-3">
+        <label class="block text-sm">Full name <input id="signup-name" required class="w-full rounded-full px-4 py-2 bg-white/6 mt-1" placeholder="e.g. John Doe"></label>
+        <label class="block text-sm">Phone <input id="signup-phone" required class="w-full rounded-full px-4 py-2 bg-white/6 mt-1" placeholder="+234..."></label>
+        <label class="block text-sm">Favorite quote <textarea id="signup-quote" rows="3" class="w-full rounded-xl px-4 py-2 bg-white/6 mt-1" placeholder="Your favorite line..."></textarea></label>
+        <label class="block text-sm">Profile photo (optional - paste image URL) <input id="signup-photo" type="url" placeholder="https://example.com/me.jpg" class="w-full rounded-full px-4 py-2 bg-white/6 mt-1"></label>
+
+        <div class="flex justify-between items-center mt-3">
+          <button type="button" onclick="closeSignup()" class="px-4 py-2 rounded-full bg-white/6">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-full bg-green-600 text-white">Create account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+/* ----------------------------
+   Data & seed members (admins + initial members)
+   ---------------------------- */
+const initialAdmins = [
+  { id:'a1', name:'broken vzn 💞', number:'+2347079115653', quote:'Live every moment as if it were your last.' },
+  { id:'a2', name:'Zoey', number:'+2347070747049', quote:'Be the change you wish to see in the world.' },
+  { id:'a3', name:'Diana Dwayne', number:'+447593814229', quote:'Dream big and dare to fail.' },
+  { id:'a4', name:'Mr Shadow', number:'+2349042192106', quote:'Shadows whisper truth.' },
+  { id:'a5', name:'lady Messiah', number:'+2347045370293', quote:'Grace with an edge.' },
+  { id:'a6', name:'𓆲 友 么 𝔅✟🩸ℜ么𝐕Є𝐍 么 友 𓆲', number:'+2348023154461', quote:'I am both calm and storm.' },
+  { id:'a7', name:'𓃵𖣘𒁂𝕰𝖒𝖕𝖊𝖗𝖔𝖗𒁂𖣘', number:'+2347035559467', quote:'Rule with fire.' }
+];
+
+const baseMembers = [
+  { id:'m1', name:'нєιѕ † ∂ινιηє', number:'+2349060526607', quote:'Faith can move mountains.' },
+  { id:'m2', name:'LEO!!!!!!!✨', number:'+213561144200', quote:'Roar like a lion.' },
+  { id:'m3', name:'†𝐻𝓸𝓁𝔂†⤷𝘽𝙇𝙐𝙀᭄ꨄ', number:'+2349165489956', quote:'Stay true to yourself.' },
+  { id:'m4', name:'﷽❥ஜ▲ஜ𝐴𝑉𝐴𝑇𝐀𝑅 🐥', number:'+218911920202', quote:'Embrace your inner avatar.' }
+];
+
+function loadMembers(){
+  const raw = localStorage.getItem('babylon_members');
+  if(raw){
+    try { return JSON.parse(raw); } catch(e) { console.warn('localStorage corrupted, reseeding'); }
+  }
+  const seed = [...initialAdmins.map(a=>({...a, role:'admin', avatar:null})), ...baseMembers.map(m=>({...m, role:'member', avatar:null}))];
+  localStorage.setItem('babylon_members', JSON.stringify(seed));
+  return seed;
+}
+let members = loadMembers();
+
+/* ----------------------------
+   Waifu placeholder for missing avatars (only used when no avatar provided)
+   ---------------------------- */
+async function fetchWaifu(){
+  try {
+    const r = await fetch('https://api.waifu.pics/sfw/waifu');
+    const j = await r.json();
+    if (j && j.url) return j.url;
+  } catch(e) { /* ignore */ }
+  return 'https://via.placeholder.com/400?text=Avatar';
+}
+
+/* ----------------------------
+   Render functions (admins, members, gallery)
+   ---------------------------- */
+function escapeHtml(s=''){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+async function renderAdmins(){
+  const c = document.getElementById('admins-list'); c.innerHTML = '';
+  for (const a of members.filter(m=>m.role==='admin')) {
+    const avatar = a.avatar || await fetchWaifu();
+    const el = document.createElement('div');
+    el.className = 'flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 transition cursor-pointer';
+    el.innerHTML = `<img src="${avatar}" class="w-14 h-14 rounded-full object-cover ring-2 ring-white/10" />
+      <div>
+        <div class="font-semibold">${escapeHtml(a.name)}</div>
+        <div class="mini-txt">${escapeHtml(a.number)}</div>
+        <div class="mini-txt italic mt-1">"${escapeHtml(a.quote||'')}"</div>
+      </div>`;
+    el.onclick = () => openProfile(a);
+    c.appendChild(el);
+  }
+}
+
+async function renderMembers(){
+  const grid = document.getElementById('members-grid'); grid.innerHTML = '';
+  for (const m of members) {
+    const avatar = m.avatar || await fetchWaifu();
+    const tile = document.createElement('div');
+    tile.className = 'flex flex-col items-center p-3 rounded-lg bg-white/3 hover:scale-105 transition cursor-pointer';
+    tile.innerHTML = `<img src="${avatar}" class="w-20 h-20 rounded-full object-cover" /><div class="text-xs text-center mt-2">${escapeHtml(m.name)}</div>`;
+    tile.onclick = () => openProfile(m);
+    grid.appendChild(tile);
+  }
+}
+
+/* gallery images you provided */
+const galleryImages = [
+  'https://i.ibb.co/Q1ZzBmx/subzero-bot.jpg',
+  'https://i.ibb.co/bjy5dfS3/subzero-bot.jpg',
+  'https://i.ibb.co/ds8NBpfz/subzero-bot.jpg',
+  'https://i.ibb.co/p6VV5Twp/subzero-bot.jpg',
+  'https://i.ibb.co/3YvX8dgq/subzero-bot.jpg',
+  'https://i.ibb.co/hRYB3SgS/subzero-bot.jpg',
+  'https://i.ibb.co/m507DH9N/subzero-bot.jpg',
+  'https://i.ibb.co/m507DH9N/subzero-bot.jpg'
+];
+
+function renderGallery(){
+  const g = document.getElementById('gallery-grid'); g.innerHTML = '';
+  for (const s of galleryImages) {
+    const img = document.createElement('img');
+    img.src = s; img.className = 'object-cover rounded-xl h-36 w-full cursor-pointer'; img.onclick = () => openLightbox(s);
+    g.appendChild(img);
+  }
+}
+
+/* ----------------------------
+   Profile modal
+   ---------------------------- */
+function openProfile(user){
+  const modal = document.getElementById('profile-modal');
+  const content = document.getElementById('profile-content');
+  const avatar = user.avatar || 'https://via.placeholder.com/300?text=Avatar';
+  content.innerHTML = `<div class="flex flex-col items-center gap-3">
+    <img src="${avatar}" class="w-32 h-32 rounded-full object-cover ring-4 ring-white/10" />
+    <h3 class="text-xl font-bold">${escapeHtml(user.name)}</h3>
+    <p class="mini-txt">${escapeHtml(user.number)}</p>
+    <p class="italic mt-2">"${escapeHtml(user.quote||'')}"</p>
+    <div class="mt-4 flex gap-2">
+      <a href="https://wa.me/${(user.number||'').replace(/\D/g,'')}" target="_blank" class="px-4 py-2 rounded-full bg-green-600 text-white">Message</a>
+      <button onclick="closeProfile()" class="px-4 py-2 rounded-full bg-white/6">Close</button>
+    </div></div>`;
+  modal.classList.remove('hidden'); modal.classList.add('flex');
+}
+function closeProfile(){ document.getElementById('profile-modal').classList.add('hidden'); }
+
+/* ----------------------------
+   Lightbox
+   ---------------------------- */
+function openLightbox(src){ document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.remove('hidden'); document.getElementById('lightbox').classList.add('flex'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.add('hidden'); }
+
+/* ----------------------------
+   Signup (store avatar as direct URL)
+   ---------------------------- */
+function saveMembers(){ localStorage.setItem('babylon_members', JSON.stringify(members)); }
+
+document.getElementById('open-signup').addEventListener('click', openSignup);
+document.getElementById('open-ai-btn').addEventListener('click', openAi);
+
+function openSignup(){ document.getElementById('signup-modal').classList.remove('hidden'); document.getElementById('signup-modal').classList.add('flex'); }
+function closeSignup(){ document.getElementById('signup-modal').classList.add('hidden'); document.getElementById('signup-form').reset(); }
+
+document.getElementById('signup-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('signup-name').value.trim();
+  const phone = document.getElementById('signup-phone').value.trim();
+  if (!name || !phone) { alert('Name and phone are required'); return; }
+  const quote = document.getElementById('signup-quote').value.trim();
+  const avatarUrl = document.getElementById('signup-photo').value.trim() || null;
+  const id = 'u' + Date.now();
+  const newUser = { id, name, number: phone, quote, avatar: avatarUrl, role: 'member' };
+  members.push(newUser);
+  saveMembers();
+  renderMembers(); renderAdmins();
+  closeSignup();
+  alert('Account created and added to Members.');
+});
+
+/* ----------------------------
+   Theme toggle (default dark)
+   ---------------------------- */
+const themeToggle = document.getElementById('theme-toggle');
+function setTheme(light){
+  if (light) {
+    document.body.classList.remove('dark'); document.body.classList.add('light');
+    document.getElementById('theme-icon').textContent = '☀️';
+    document.querySelectorAll('.glass').forEach(el=>el.classList.replace('glass','glass-light'));
+  } else {
+    document.body.classList.remove('light'); document.body.classList.add('dark');
+    document.getElementById('theme-icon').textContent = '🌙';
+    document.querySelectorAll('.glass-light').forEach(el=>el.classList.replace('glass-light','glass'));
+  }
+}
+setTheme(false);
+themeToggle.addEventListener('click', ()=> setTheme(document.body.classList.contains('dark')));
+
+/* ----------------------------
+   Sidebar behavior & dashboard buttons
+   ---------------------------- */
+const sidebar = document.getElementById('sidebar');
+document.getElementById('dashboard-open').addEventListener('click', ()=> sidebar.classList.add('open'));
+document.getElementById('sidebar-close').addEventListener('click', ()=> sidebar.classList.remove('open'));
+
+document.querySelectorAll('.dash-item').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const t = e.currentTarget.dataset.target;
+    sidebar.classList.remove('open');
+    if (t === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (t === 'gallery') document.getElementById('gallery-grid').scrollIntoView({ behavior: 'smooth' });
+    if (t === 'members') document.getElementById('members-grid').scrollIntoView({ behavior: 'smooth' });
+    if (t === 'admins') document.getElementById('admins-list').scrollIntoView({ behavior: 'smooth' });
+    if (t === 'ai') openAi();
+  });
+});
+
+/* ----------------------------
+   AI full-screen chat (uses your provided endpoint)
+   - builds system prompt + user text, sends GET to:
+     https://urangkapolka.vercel.app/api/chatgpt4?prompt=...
+   - falls back to POST if GET fails
+   ---------------------------- */
+const aiScreen = document.getElementById('ai-screen');
+const aiBody = document.getElementById('ai-chat-body');
+const aiInput = document.getElementById('ai-input');
+const aiSend = document.getElementById('ai-send');
+
+const SYSTEM_PROMPT = `You are Babylon AI, assistant for the WhatsApp group "𓆩𒌐𓆪BABYLON𓆩𒌐𓆪".
+Tone: witty and savage but avoid promoting harm or illegal acts.
+Rules: respect admins; only admins post external links; no spam; no religion/politics.
+Weekly games: Mon MCM, Tue Anonymous message, Wed WCW, Thu Karaoke/Truth-or-Dare, Fri Would you rather, Sat Challenge, Sun Throwback.
+Always be helpful and clear when asked about the group.`;
+
+document.getElementById('ai-close').addEventListener('click', ()=> aiScreen.classList.add('hidden'));
+document.getElementById('ask-ai-btn').addEventListener('click', ()=> openAi());
+
+function openAi(){
+  aiScreen.classList.remove('hidden'); aiScreen.classList.add('flex'); aiBody.innerHTML=''; aiInput.value=''; aiInput.focus();
+  appendAi('bot', "Hello — I'm Babylon AI. Ask me anything about the group.");
+}
+
+aiSend.addEventListener('click', sendAi);
+aiInput.addEventListener('keydown', (e)=> { if (e.key === 'Enter') sendAi(); });
+
+let aiBusy = false;
+async function sendAi(){
+  if (aiBusy) return;
+  const text = aiInput.value.trim(); if (!text) return;
+  appendAi('user', text);
+  aiInput.value = '';
+  aiBusy = true;
+  const placeholderId = appendAi('bot', 'Babylon AI is typing...', true);
+
+  try {
+    const fullPrompt = `${SYSTEM_PROMPT}\n\nUser: ${text}\nAssistant:`;
+    const getUrl = `https://urangkapolka.vercel.app/api/chatgpt4?prompt=${encodeURIComponent(fullPrompt)}`;
+    let res = await fetch(getUrl, { method: 'GET' });
+
+    if (!res.ok) {
+      // fallback POST (some endpoints accept JSON)
+      try {
+        res = await fetch('https://urangkapolka.vercel.app/api/chatgpt4', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: fullPrompt })
+        });
+      } catch (postErr) {
+        throw postErr;
+      }
+    }
+
+    const ct = res.headers.get('content-type') || '';
+    let reply = '';
+    if (ct.includes('application/json')) {
+      const j = await res.json();
+      reply = j.reply || j.answer || j.text || j.output || JSON.stringify(j);
+    } else {
+      reply = await res.text();
+    }
+
+    replaceAi(placeholderId, reply);
+  } catch (err) {
+    console.error('AI error', err);
+    replaceAi(placeholderId, 'Sorry — Babylon AI could not get a reply right now. Possible CORS or server error.');
+  } finally {
+    aiBusy = false;
+  }
+}
+
+/* AI UI helpers */
+function appendAi(role, text, wantId = false){
+  const wrap = document.createElement('div'); wrap.className = 'w-full flex';
+  const bubble = document.createElement('div'); bubble.className = 'rounded-xl p-4 max-w-[85%] text-sm';
+  if (role === 'user') {
+    bubble.classList.add('ml-auto','msg-user'); bubble.innerHTML = `${escapeHtml(text).replace(/\n/g,'<br>')}`;
+  } else {
+    bubble.classList.add('mr-auto','msg-bot'); const id = 'msg-' + Date.now(); bubble.dataset.msgid = id;
+    bubble.innerHTML = `<div id="${id}-text">${escapeHtml(text).replace(/\n/g,'<br>')}</div>
+      <div class="mt-2 flex gap-2"><button onclick="copyText('${id}-text')" class="px-2 py-1 rounded-full bg-white/6 text-xs">Copy</button></div>`;
+  }
+  wrap.appendChild(bubble); aiBody.appendChild(wrap); aiBody.scrollTop = aiBody.scrollHeight;
+  if (wantId) return bubble.dataset.msgid; return null;
+}
+function replaceAi(msgId, newText){
+  const el = document.querySelector(`[data-msgid="${msgId}"]`);
+  if (el) {
+    const textId = msgId + '-text';
+    el.innerHTML = `<div id="${textId}">${escapeHtml(newText).replace(/\n/g,'<br>')}</div>
+      <div class="mt-2 flex gap-2"><button onclick="copyText('${textId}')" class="px-2 py-1 rounded-full bg-white/6 text-xs">Copy</button></div>`;
+    aiBody.scrollTop = aiBody.scrollHeight;
+  } else appendAi('bot', newText);
+}
+window.copyText = (elementId) => {
+  const el = document.getElementById(elementId); if (!el) return;
+  const text = el.innerText || el.textContent || '';
+  navigator.clipboard.writeText(text).then(()=> alert('Copied to clipboard'), ()=> alert('Copy failed'));
+};
+
+/* ----------------------------
+   Boot UI (render everything & bind buttons)
+   ---------------------------- */
+(async function init(){
+  renderGallery();
+  await renderAdmins();
+  await renderMembers();
+
+  // bindings
+  document.getElementById('gallery-btn').addEventListener('click', ()=> document.getElementById('gallery-grid').scrollIntoView({ behavior:'smooth' }));
+  document.getElementById('dashboard-open').addEventListener('click', ()=> sidebar.classList.add('open'));
+  document.getElementById('sidebar-close').addEventListener('click', ()=> sidebar.classList.remove('open'));
+  document.getElementById('ask-ai-btn').addEventListener('click', ()=> openAi());
+
+  // close modals when clicking outside
+  document.getElementById('profile-modal').addEventListener('click', (e)=> { if (e.target.id === 'profile-modal') closeProfile(); });
+  document.getElementById('lightbox').addEventListener('click', (e)=> { if (e.target.id === 'lightbox') closeLightbox(); });
+  document.getElementById('signup-modal').addEventListener('click', (e)=> { if (e.target.id === 'signup-modal') closeSignup(); });
+})();
+
+</script>
+</body>
+  </html>
